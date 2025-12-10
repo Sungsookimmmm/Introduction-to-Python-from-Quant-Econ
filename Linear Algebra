@@ -1,0 +1,378 @@
+# Applied Linear Algebra
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+x = np.array([1, 2, 3])
+y = np.array([4, 5, 6])
+
+print("Element-wise Addition:", x + y)
+print("Element-wise Subtraction:", x - y)
+print("Element-wise Multiplication:", x * y)
+print("Element-wise Division:", x / y)
+
+# Example plot
+plt.plot(x, y)
+plt.xlabel("x values")
+plt.ylabel("y values")
+plt.title("Simple Plot")
+plt.show()
+
+print("Scalar Addition", 3 + x)
+print("Scalar Subtraction", 3 - x)
+print("Scalar Multiplication", 3 * x)
+print("Scalar Division", 3 / x)
+
+# np.dot(x, y) computes the dot product of two vectors:
+# (1*4) + (2*5) + (3*6) = 32
+# In linear algebra, the dot product is a scalar that measures
+# how much two vectors align with each other.
+print("Dot product", np.dot(x, y))
+# Dot product 32
+print("Dot product with @", x @ y)
+
+# Portfolio Valuation Example
+
+# Parameters
+interest_rate = 0.05
+
+# Cash flows per unit of asset A and B
+cashflows_A = np.array([1500] * 6)   # 6 years of $1500
+cashflows_B = np.array([500] * 4 + [0] * 2)  # 4 years of $500, padded to length 6
+
+# Holdings
+units_A = 100
+units_B = 50
+
+# Portfolio cash flows (vector addition + scalar multiplication)
+portfolio_cashflows = units_A * cashflows_A + units_B * cashflows_B
+
+# Discount vector at 5%
+discount_vector = np.array([(1 / (1 + interest_rate)) ** t for t in range(1, 7)])
+
+# Present value via dot product
+present_value = np.dot(portfolio_cashflows, discount_vector)
+
+# Retirement check
+print("Present Value of Portfolio:", round(present_value, 2))
+if present_value > 500000:
+    print("Alice can retire!")
+else:
+    print("Alice cannot retire yet.")
+
+
+
+
+# Asset quantities
+nA = 100
+nB = 50
+nassets = np.array([nA, nB])
+
+# Parameters
+i = 0.05
+durationA = 6
+durationB = 4
+
+# Cash flows per unit of asset A and B
+cashflows_A = np.array([1500] * durationA)
+cashflows_B = np.array([500] * durationB + [0] * (durationA - durationB))  # pad to same length
+
+# Portfolio cash flows (vector addition + scalar multiplication)
+portfolio_cashflows = nA * cashflows_A + nB * cashflows_B
+
+# Discount vector
+discount_vector = np.array([(1 / (1 + i)) ** t for t in range(1, durationA + 1)])
+
+# Compute present value using dot product
+price = np.dot(portfolio_cashflows, discount_vector)
+
+# Retirement check
+if price > 500000:
+    print("Alice can retire")
+else:
+    print("Alice cannot retire yet")
+
+print("Present Value of Portfolio:", round(price, 2))
+
+#Matrix Operations
+x = np.array([[1, 2, 3], [4, 5, 6]])
+y = np.ones((2, 3))
+z = np.array([[1, 2], [3, 4], [5, 6]])
+
+print("Element-wise Addition\n", x + y)
+print("Element-wise Subtraction\n", x - y)
+print("Element-wise Multiplication\n", x * y)
+print("Element-wise Division\n", x / y)
+
+print("Scalar Addition\n", 3 + x)
+print("Scalar Subtraction\n", 3 - x)
+print("Scalar Multiplication\n", 3 * x)
+print("Scalar Division\n", 3 / x)
+
+x1 = np.reshape(np.arange(6), (3, 2))
+x2 = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
+x3 = np.array([[2, 5, 2], [1, 2, 1]])
+x4 = np.ones((2, 3))
+
+y1 = np.array([1, 2, 3])
+y2 = np.array([0.5, 0.5])
+
+print("Using the matmul function for two matrices")
+print(np.matmul(x1, x4))
+print("Using the dot function for two matrices")
+print(np.dot(x1, x4))
+print("Using @ for two matrices")
+print(x1 @ x4)
+
+#Other Linear Algbra Operations
+
+x = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print("x is")
+print(x)
+print("x transpose is")
+print(x.transpose())
+
+#Identity Matrix
+I = np.eye(3)
+print("Identity Matrix I", "\n", I)
+x = np.reshape(np.arange(9), (3, 3))
+y = np.array([1, 2, 3])
+print("x", "\n", x)
+print("y", "\n", y)
+
+print("I @ x", "\n", I @ x)
+print("x @ I", "\n", x @ I)
+print("I @ y", "\n", I @ y)
+print("y @ I", "\n", y @ I)
+
+#Inverse Matrix
+# This is a square (N x N) non-singular matrix
+A = np.array([[1, 2, 0], [3, 1, 0], [0, 1, 2]])
+print("A is")
+print(A)
+
+print("This is A inverse")
+
+print(np.linalg.inv(A))
+
+print("Check that A @ A inverse is I")
+print(np.linalg.inv(A) @ A)
+
+#Portfolios
+4.0 * 3.0 + 2.5 * 5.0 + 8 * 1.1
+
+x = np.array([4.0, 2.5, 8.0]) # portfolio units
+y = np.array([3.0, 5.0, 1.1]) # payoffs
+n = len(x)
+p = 0.0
+for i in range(n): # i.e. 0, 1, 2
+    p = p + x[i] * y[i]
+
+p
+
+np.dot(x, y)
+
+y = np.array([3.0, 5.0, 1.1]) # payoffs
+x1 = np.array([4.0, 2.5, 8.0]) # portfolio 1
+x2 = np.array([2.0, 1.5, 0.0]) # portfolio 2
+X = np.array((x1, x2))
+print("X is")
+print(X)
+print(X[0,:])  # first row
+print(X[1,:])  # second row
+# calculate with inner products
+p1 = np.dot(X[0,:], y)
+p2 = np.dot(X[1,:], y)
+print("Calculating separately")
+print([p1, p2])
+
+# or with a matrix multiplication
+print("Calculating with matrices")
+P = X @ y
+print(P)
+
+#NPV of a Portfolio
+#Frist with finite case with T = 20 periods
+# Depreciation of production rates
+gamma_A = 0.80
+gamma_B = 0.90
+
+# Interest rate discounting
+r = 0.05
+discount = np.array([(1 / (1+r))**t for t in range(20)])
+print(discount)
+print(f"Discount factors are {discount}")
+
+
+# Let's first create arrays that have the production of each oilfield
+oil_A = 5 * np.array([gamma_A**t for t in range(20)])
+oil_B = 2 * np.array([gamma_B**t for t in range(20)])
+oilfields = np.array([oil_A, oil_B])
+print(f"Oilfield production rates are \n {oilfields}")
+# Use matrix multiplication to get discounted sum of oilfield values and then sum
+# the two values
+Vs = oilfields @ discount
+print("The npv of oilfields is ", Vs)
+
+print(f"The npv of oilfields is {Vs.sum()}")
+
+#Now with infinite case
+# Depreciation of production rates
+gamma_A = 0.80
+gamma_B = 0.90
+
+# Interest rate discounting
+r = 0.05
+
+
+def infhor_NPV_oilfield(starting_output, gamma, r):
+    beta = gamma / (1 + r)
+    return starting_output / (1 - beta)
+
+
+def compute_NPV_oilfield(starting_output, gamma, r, T):
+    outputs = starting_output * np.array([gamma**t for t in range(T)])
+    discount = np.array([(1 / (1+r))**t for t in range(T)])
+
+    npv = np.dot(outputs, discount)
+
+    return npv
+
+Ts = np.arange(2, 75)
+print   (Ts)
+
+NPVs_A = np.array([compute_NPV_oilfield(5, gamma_A, r, t) for t in Ts])
+NPVs_B = np.array([compute_NPV_oilfield(2, gamma_B, r, t) for t in Ts])
+print(NPVs_A)
+print(NPVs_B)
+NPVs_T = NPVs_A + NPVs_B
+print(NPVs_T)
+NPV_oo = infhor_NPV_oilfield(5, gamma_A, r) + infhor_NPV_oilfield(2, gamma_B, r)
+print   (NPV_oo)
+
+fig, ax = plt.subplots()
+
+ax.set_title("NPV with Varying T")
+ax.set_ylabel("NPV")
+
+ax.plot(Ts, NPVs_A + NPVs_B)
+ax.hlines(NPV_oo, Ts[0], Ts[-1], color="k", linestyle="--")  # Plot infinite horizon value
+
+ax.spines["right"].set_visible(True)
+ax.spines["top"].set_visible(True)
+
+plt.show()
+#NPV with Matrix Inversion
+# Parameters
+p_A = 1.0
+p_B = 1.0
+G = np.array([p_A, p_B])
+print  ("G is")
+print  (G)
+
+r = 0.05
+beta = 1 / (1 + r)
+
+gamma_A = 0.80
+gamma_B = 0.90
+A = np.array([[gamma_A, 0], [0, gamma_B]])
+print  ("A is")
+print  (A)
+x_0 = np.array([5, 2])
+print  ("x_0 is")
+print  (x_0)
+
+
+# Compute with matrix formula
+print("NPV with matrix inversion is")
+print(np.linalg.inv(np.eye(2) - beta*A))
+NPV_mf = G @ np.linalg.inv(np.eye(2) - beta*A) @ x_0
+
+print(NPV_mf)
+
+#Unemployment Dynamics
+
+phi = 0.1
+alpha = 0.05
+
+
+x0 = np.array([900_000, 100_000])
+print   ("Initial state x0 is")
+print   (x0)    
+A = np.array([[1-alpha, alpha], [phi, 1-phi]])
+print   ("Transition matrix A is")
+print   (A)
+
+nX = x0.shape[0]
+print   ("Number of states nX is")
+print   (nX)
+out = np.zeros((10, nX))
+print   ("Output array out is")
+print   (out)
+out[0, :] = x0
+print   ("Set initial state in out")
+print   (out)
+print   (A.T)
+print   (out[0, :]) 
+print(A.T @ out[0, :])
+
+#[0.95, 0.1 ]   [900000.]   = [0.95*900000 + 0.1*100000, 0.05*900000 + 0.9*100000]
+#[0.05, 0.9 ] x [100000.]   = [860000, 140000]
+
+def simulate(x0, A, T=10):
+    """
+    Simulate the dynamics of unemployment for T periods starting from x0
+    and using values of A for probabilities of moving between employment
+    and unemployment
+    """
+    nX = x0.shape[0]
+    out = np.zeros((T, nX))
+    out[0, :] = x0
+
+    for t in range(1, T):
+        out[t, :] = A.T @ out[t-1, :]
+
+    return out
+print   ("Simulate function defined")       
+simulated_values = simulate(x0, A, T=10)
+print   ("Simulated values are")
+print   (simulated_values)  
+
+#plotting the results
+def plot_simulation(x0, A, T=100):
+    X = simulate(x0, A, T)
+    fig, ax = plt.subplots()
+    ax.plot(X[:, 0])
+    ax.plot(X[:, 1])
+    ax.set_xlabel("t")
+    ax.legend(["Employed", "Unemployed"])
+    return ax
+
+plot_simulation(x0, A, 50)
+plot_simulation(x0, A, 5000)
+
+#Eigenvalues and Eigenvectors
+print(A.T)
+print   (np.linalg.eig(A.T))
+
+eigvals, eigvecs = np.linalg.eig(A.T)
+print("Eigenvalues:")
+print(eigvals)
+print("\nEigenvectors (columns):")
+print(eigvecs)
+eigvals, eigvecs = np.linalg.eig(A.T)
+for i in range(len(eigvals)):
+    if eigvals[i] == 1:
+        which_eig = i
+        break
+print(f"We are looking for eigenvalue {which_eig}")
+dist = eigvecs[:, which_eig]
+print(dist)
+# need to divide by sum so it adds to 1
+dist = dist / dist.sum()
+print(f"The distribution of workers is given by {dist}")
+dist /= dist.sum()
+
+print(f"The distribution of workers is given by {dist}")
+
+#
