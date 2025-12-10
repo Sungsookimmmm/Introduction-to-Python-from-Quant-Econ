@@ -1,3 +1,3 @@
-# Introduction-to-Python-from-Quon-Econ
-I practiced Python codes from Quon Econ. 
-The link of Qon Econ could be found here: https://quantecon.org/lectures/
+# Introduction-to-Python-from-Quant-Econ
+I practiced Python code from QuantEcon. 
+The link to Qon Econ could be found here: https://quantecon.org/lectures/
